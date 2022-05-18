@@ -11,13 +11,14 @@ public class Card {
     private String levelupDescriptionRaw;
     private String flavorText;
     private String artistName;
-    private String spellSpeed;
     private String rarityRef;
     private String type;
+    private String spellSpeed;
 
     // Lists
     private ArrayList<String> keywordRefs;
     private ArrayList<String> regionRefs;
+    private ArrayList<Object> assets;
 
     // Integer
     private int cost;
