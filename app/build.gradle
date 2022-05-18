@@ -32,6 +32,7 @@ android {
             }
         }
     }
+    namespace 'ch.bbcag.lorlibrary'
 }
 
 dependencies {
