@@ -186,12 +186,6 @@ public class Card {
 
   @Override
   public String toString() {
-    return "Card{" +
-            "name='" + name + '\'' +
-            ", descriptionRaw='" + descriptionRaw + '\'' +
-            ", artistName='" + artistName + '\'' +
-            ", type='" + type + '\'' +
-            ", regionRefs=" + regionRefs +
-            '}';
+    return name + '\n' + descriptionRaw + '\n' + '\n' + type + artistName;
   }
 }
