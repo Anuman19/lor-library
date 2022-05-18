@@ -19,6 +19,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setTitle("LoR Library");
+        try {
+            addCardsToClickableList();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     //This method loads all the cards from the json file into Card Objects to then display
