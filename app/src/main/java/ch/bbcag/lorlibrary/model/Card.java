@@ -1,6 +1,7 @@
 package ch.bbcag.lorlibrary.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Card {
 
