@@ -178,14 +178,32 @@ public class Card {
     this.assets = assets;
   }
 
+  public String getBanner(){
+    String parent = String.valueOf(getAssets().get(0));
+    String[] paths = parent.split(",");
+    String[] banner = paths[1].split("=");
+    String bannerPath = banner[1];
+    bannerPath = bannerPath.substring(0, bannerPath.length()-1);
+    return bannerPath;
+  }
+
+  public String getCardImage(){
+    String parent = String.valueOf(getAssets().get(0));
+    String[] paths = parent.split(",");
+    String[] cardImage = paths[0].split("=");
+    String cardImagePath = cardImage[1];
+    return cardImagePath;
+  }
+
   public String[] getAssetsString() {
     String parent = String.valueOf(getAssets().get(0));
     String[] paths = parent.split("=");
+    System.out.println(parent);
     return paths[1].split(",");
   }
 
   @Override
   public String toString() {
-    return name + '\n' + descriptionRaw + '\n' + '\n' + type + artistName;
+    return name + "\n" + type;
   }
 }

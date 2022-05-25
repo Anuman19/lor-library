@@ -26,51 +26,62 @@ import ch.bbcag.lorlibrary.model.Card;
 
 public class MainActivity extends AppCompatActivity {
 
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
-    try {
-      addCardsToClickableList();
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-  }
-
-  // This method loads all the cards from the json file into Card Objects to then display
-  private void addCardsToClickableList() throws IOException {
-    ListView cards = findViewById(R.id.cardList);
-
-    String string = "";
-    try {
-      InputStream inputStream = getAssets().open("set1-en_us.json");
-      int size = inputStream.available();
-      byte[] buffer = new byte[size];
-      inputStream.read(buffer);
-      string = new String(buffer);
-    } catch (IOException e) {
-      e.printStackTrace();
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        try {
+            addCardsToClickableList();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    Gson gson = new Gson();
+    // This method loads all the cards from the json file into Card Objects to then display
+    private void addCardsToClickableList() throws IOException {
+        ListView cards = findViewById(R.id.cardList);
 
-    ArrayAdapter<Card> cardAdapter =
-        new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1);
-    cardAdapter.addAll(gson.fromJson(string, Card[].class));
-    cards.setAdapter(cardAdapter);
+        String string = "";
+        try {
+            InputStream inputStream = getAssets().open("set1-en_us.json");
+            int size = inputStream.available();
+            byte[] buffer = new byte[size];
+            inputStream.read(buffer);
+            string = new String(buffer);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-    AdapterView.OnItemClickListener mListClickedHandler =
-        (parent, v, position, id) -> {
-          Intent intent = new Intent(getApplicationContext(), CardImageTest.class);
-          Card selected = (Card) parent.getItemAtPosition(position);
-          intent.putExtra("cardCode", selected.getCardCode());
-          intent.putExtra("name", selected.getName());
-          Bundle args = new Bundle();
-          // args.putSerializable("assets", selected.getAssets());
-          intent.putExtra("assets", selected.getAssetsString());
-          //System.out.println(selected.getAssetsString()[0]);
-          startActivity(intent);
-        };
-    cards.setOnItemClickListener(mListClickedHandler);
-  }
+        Gson gson = new Gson();
+
+        ArrayAdapter<Card> cardAdapter =
+                new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1);
+        cardAdapter.addAll(gson.fromJson(string, Card[].class));
+        cards.setAdapter(cardAdapter);
+
+        AdapterView.OnItemClickListener mListClickedHandler =
+                (parent, v, position, id) -> {
+                    Intent intent = new Intent(getApplicationContext(), CardImageTest.class);
+                    Card selected = (Card) parent.getItemAtPosition(position);
+
+                    // pass Extras to DetailPage
+                    intent.putExtra("cardCode", selected.getCardCode());
+                    intent.putExtra("name", selected.getName());
+                    intent.putExtra("cardImage", selected.getCardImage());
+                    intent.putExtra("banner", selected.getBanner());
+                    intent.putExtra("descriptionRaw", selected.getDescriptionRaw());
+                    intent.putExtra("levelupDescriptionRaw", selected.getLevelupDescriptionRaw());
+                    intent.putExtra("flavorText", selected.getFlavorText());
+                    intent.putExtra("artistName", selected.getArtistName());
+                    intent.putExtra("rarityRef", selected.getRarityRef());
+                    intent.putExtra("type", selected.getType());
+
+
+
+                    Bundle args = new Bundle();
+                    //System.out.println(selected.getAssetsString()[0]);
+                    startActivity(intent);
+                };
+        cards.setOnItemClickListener(mListClickedHandler);
+    }
 }
