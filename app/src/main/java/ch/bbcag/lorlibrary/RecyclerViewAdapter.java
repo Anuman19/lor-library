@@ -1,25 +1,18 @@
 package ch.bbcag.lorlibrary;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.Arrays;
-import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 import ch.bbcag.lorlibrary.model.Card;
 
@@ -29,14 +22,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
   private Context context;
   private ClickListener clickListener;
 
-  public RecyclerViewAdapter(Context context, Card[] cards) {
+  public RecyclerViewAdapter(Context context, Card[] cards, ClickListener clickListener) {
     this.context = context;
     this.cards = cards;
+    this.clickListener = clickListener;
     System.out.println(Arrays.toString(cards));
-  }
-
-  public void setOnItemClickListener(ClickListener<Card> cardClickListener) {
-    this.clickListener = cardClickListener;
   }
 
   @NonNull
@@ -56,8 +46,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     new DownloadImageFromInternet(holder.image.getContext(), holder.image)
         .execute(card.getCardImage());
-
-    holder.cardView.setOnClickListener(data -> clickListener.onItemClick(data));
+    holder.cardView.setOnClickListener(
+        data -> {
+          Toast.makeText(context, "This is position of your Every ItemViews", Toast.LENGTH_SHORT)
+              .show();
+          clickListener.onItemClick(position);
+        });
   }
 
   @Override
@@ -75,6 +69,18 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
       title = itemView.findViewById(R.id.card_name);
       image = itemView.findViewById(R.id.card_image);
       cardView = itemView.findViewById(R.id.card_view);
+    }
+
+    public TextView getTitle() {
+      return title;
+    }
+
+    public ImageView getImage() {
+      return image;
+    }
+
+    public CardView getCardView() {
+      return cardView;
     }
   }
 }

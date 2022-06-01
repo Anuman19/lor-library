@@ -1,5 +1,9 @@
 package ch.bbcag.lorlibrary;
 
-public interface ClickListener<T> {
-  void onItemClick(T data);
+import android.view.View;
+
+import androidx.recyclerview.widget.RecyclerView;
+
+public interface ClickListener {
+  void onItemClick(int position);
 }

@@ -208,6 +208,13 @@ public class Card {
     return paths[1].split(",");
   }
 
+  public Card getCardByCode(String cardCode) {
+    if (this.cardCode.equals(cardCode)) {
+      return this;
+    }
+    return null;
+  }
+
   @NonNull
   @Override
   public String toString() {
