@@ -1,7 +1,24 @@
 
 r
-java:S1450"WRemove the "cardCode" field and declare it as a local variable in the relevant methods.(ï×ÿÇşÿÿÿÿ
-
-java:S1450"_Remove the "gameAbsolutePath" field and declare it as a local variable in the relevant methods.(İ«¹îşÿÿÿÿ8³¤ëº0
+java:S1450"WRemove the "cardCode" field and declare it as a local variable in the relevant methods.(ï×ÿÇşÿÿÿÿ
+z
+java:S1450"_Remove the "fullAbsolutePath" field and declare it as a local variable in the relevant methods.(¬õ†îúÿÿÿÿ
+z
+java:S1450"_Remove the "gameAbsolutePath" field and declare it as a local variable in the relevant methods.(İ«¹îşÿÿÿÿ
+V	java:S1252"<This block of commented-out lines of code should be removed.(æã‘¼ÿÿÿÿÿ
 G
-java:S1068",Remove this unused "cardCode" private field.(ï×ÿÇşÿÿÿÿ
+java:S1068",Remove this unused "cardCode" private field.(ï×ÿÇşÿÿÿÿ
+>
+java:S1068"(Remove this unused "name" private field.(Ë¥¼
+H
+java:S1068"2Remove this unused "descriptionRaw" private field.(•Úó†
+O
+java:S1068"9Remove this unused "levelupDescriptionRaw" private field.(¾šëÌ
+I
+java:S1068".Remove this unused "flavorText" private field.(æÜÔúÿÿÿÿ
+I
+java:S1068".Remove this unused "artistName" private field.(äš„¯ûÿÿÿÿ
+C
+java:S1068"-Remove this unused "rarityRef" private field.(» ç”
+C
+java:S1068"(Remove this unused "type" private field.(–î†ûÿÿÿÿ

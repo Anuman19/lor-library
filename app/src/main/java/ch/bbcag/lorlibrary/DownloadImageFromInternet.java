@@ -12,12 +12,11 @@ import java.io.InputStream;
 
 public class DownloadImageFromInternet extends AsyncTask<String, Void, Bitmap> {
   ImageView imageView;
+  Bitmap image;
 
   public DownloadImageFromInternet(Context context, ImageView imageView) {
     this.imageView = imageView;
-    Toast.makeText(
-           context, "Please wait, it may take a few minute...", Toast.LENGTH_SHORT)
-        .show();
+    Toast.makeText(context, "Please wait, it may take a few minute...", Toast.LENGTH_SHORT).show();
   }
 
   protected Bitmap doInBackground(String... urls) {
@@ -30,11 +29,17 @@ public class DownloadImageFromInternet extends AsyncTask<String, Void, Bitmap> {
       Log.e("Error Message", e.getMessage());
       e.printStackTrace();
     }
+
     return bimage;
   }
 
   @Override
   protected void onPostExecute(Bitmap result) {
     imageView.setImageBitmap(result);
+    this.image = result;
+  }
+
+  public Bitmap getImage() {
+    return image;
   }
 }

@@ -1,7 +1,9 @@
 package ch.bbcag.lorlibrary.model;
 
+import androidx.annotation.NonNull;
+
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.List;
 
 public class Card {
 
@@ -17,9 +19,9 @@ public class Card {
   private String spellSpeed;
 
   // Lists
-  private ArrayList<String> keywordRefs;
-  private ArrayList<String> regionRefs;
-  private ArrayList<Object> assets;
+  private List<String> keywordRefs;
+  private List<String> regionRefs;
+  private List<Object> assets;
 
   // Integer
   private int cost;
@@ -36,9 +38,9 @@ public class Card {
       String spellSpeed,
       String rarityRef,
       String type,
-      ArrayList<String> keywordRefs,
-      ArrayList<String> regionRefs,
-      ArrayList<Object> assets,
+      List<String> keywordRefs,
+      List<String> regionRefs,
+      List<Object> assets,
       int cost,
       int attack,
       int health) {
@@ -131,19 +133,19 @@ public class Card {
     this.type = type;
   }
 
-  public ArrayList<String> getKeywordRefs() {
+  public List<String> getKeywordRefs() {
     return keywordRefs;
   }
 
-  public void setKeywordRefs(ArrayList<String> keywordRefs) {
+  public void setKeywordRefs(List<String> keywordRefs) {
     this.keywordRefs = keywordRefs;
   }
 
-  public ArrayList<String> getRegionRefs() {
+  public List<String> getRegionRefs() {
     return regionRefs;
   }
 
-  public void setRegionRefs(ArrayList<String> regionRefs) {
+  public void setRegionRefs(List<String> regionRefs) {
     this.regionRefs = regionRefs;
   }
 
@@ -171,29 +173,28 @@ public class Card {
     this.health = health;
   }
 
-  protected ArrayList<Object> getAssets() {
+  protected List<Object> getAssets() {
     return assets;
   }
 
-  public void setAssets(ArrayList<Object> assets) {
+  public void setAssets(List<Object> assets) {
     this.assets = assets;
   }
 
-  public String getBanner(){
+  public String getBanner() {
     String parent = String.valueOf(getAssets().get(0));
     String[] paths = parent.split(",");
     String[] banner = paths[1].split("=");
     String bannerPath = banner[1];
-    bannerPath = bannerPath.substring(0, bannerPath.length()-1);
+    bannerPath = bannerPath.substring(0, bannerPath.length() - 1);
     return bannerPath;
   }
 
-  public String getCardImage(){
+  public String getCardImage() {
     String parent = String.valueOf(getAssets().get(0));
     String[] paths = parent.split(",");
     String[] cardImage = paths[0].split("=");
-    String cardImagePath = cardImage[1];
-    return cardImagePath;
+    return cardImage[1];
   }
 
   public String[] getAssetsString() {
@@ -203,6 +204,7 @@ public class Card {
     return paths[1].split(",");
   }
 
+  @NonNull
   @Override
   public String toString() {
     return name + "\n" + type;
