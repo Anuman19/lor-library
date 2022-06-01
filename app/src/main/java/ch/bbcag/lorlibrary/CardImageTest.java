@@ -48,11 +48,12 @@ public class CardImageTest extends AppCompatActivity {
 
         String info = firstRegion + ", " + type;
 
-    new DownloadImageFromInternet(
-            getApplicationContext(), (ImageView) findViewById(R.id.card_banner))
-        .execute(fullAbsolutePath);
+        new DownloadImageFromInternet(
+                getApplicationContext(), (ImageView) findViewById(R.id.card_banner))
+                .execute(fullAbsolutePath);
 
-        new DownloadImageFromInternet((ImageView) findViewById(R.id.card_image))
+        new DownloadImageFromInternet(
+                getApplicationContext(), (ImageView) findViewById(R.id.card_image))
                 .execute(gameAbsolutePath);
 
         TextView cardName = (TextView) findViewById(R.id.card_name);
@@ -79,33 +80,33 @@ public class CardImageTest extends AppCompatActivity {
         }
     }
 
-  //    private class DownloadImageFromInternet extends AsyncTask<String, Void, Bitmap> {
-  //        ImageView imageView;
-  //
-  //        public DownloadImageFromInternet(ImageView imageView) {
-  //            this.imageView = imageView;
-  //            Toast.makeText(
-  //                            getApplicationContext(),
-  //                            "Please wait, it may take a few minutes...",
-  //                            Toast.LENGTH_SHORT)
-  //                    .show();
-  //        }
-  //
-  //        protected Bitmap doInBackground(String... urls) {
-  //            String imageURL = urls[0];
-  //            Bitmap bimage = null;
-  //            try {
-  //                InputStream in = new java.net.URL(imageURL).openStream();
-  //                bimage = BitmapFactory.decodeStream(in);
-  //            } catch (Exception e) {
-  //                Log.e("Error Message", e.getMessage());
-  //                e.printStackTrace();
-  //            }
-  //            return bimage;
-  //        }
-  //
-  //        protected void onPostExecute(Bitmap result) {
-  //            imageView.setImageBitmap(result);
-  //        }
-  //    }
+    //    private class DownloadImageFromInternet extends AsyncTask<String, Void, Bitmap> {
+    //        ImageView imageView;
+    //
+    //        public DownloadImageFromInternet(ImageView imageView) {
+    //            this.imageView = imageView;
+    //            Toast.makeText(
+    //                            getApplicationContext(),
+    //                            "Please wait, it may take a few minutes...",
+    //                            Toast.LENGTH_SHORT)
+    //                    .show();
+    //        }
+    //
+    //        protected Bitmap doInBackground(String... urls) {
+    //            String imageURL = urls[0];
+    //            Bitmap bimage = null;
+    //            try {
+    //                InputStream in = new java.net.URL(imageURL).openStream();
+    //                bimage = BitmapFactory.decodeStream(in);
+    //            } catch (Exception e) {
+    //                Log.e("Error Message", e.getMessage());
+    //                e.printStackTrace();
+    //            }
+    //            return bimage;
+    //        }
+    //
+    //        protected void onPostExecute(Bitmap result) {
+    //            imageView.setImageBitmap(result);
+    //        }
+    //    }
 }
