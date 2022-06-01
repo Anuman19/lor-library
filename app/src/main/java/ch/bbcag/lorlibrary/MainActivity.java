@@ -75,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
                     intent.putExtra("artistName", selected.getArtistName());
                     intent.putExtra("rarityRef", selected.getRarityRef());
                     intent.putExtra("type", selected.getType());
+                    intent.putExtra("firstRegion", selected.getFirstRegion());
 
 
 
