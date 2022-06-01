@@ -41,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
       e.printStackTrace();
     }
 
-<<<<<<< app/src/main/java/ch/bbcag/lorlibrary/MainActivity.java
     Gson gson = new Gson();
 
     Card[] cards = gson.fromJson(string, Card[].class);
