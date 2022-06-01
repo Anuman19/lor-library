@@ -145,7 +145,11 @@ public class Card {
     return regionRefs;
   }
 
-  public void setRegionRefs(List<String> regionRefs) {
+  public String getFirstRegion() {
+    return regionRefs.get(0);
+  }
+
+  public void setRegionRefs(ArrayList<String> regionRefs) {
     this.regionRefs = regionRefs;
   }
 

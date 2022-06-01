@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
       e.printStackTrace();
     }
 
+<<<<<<< app/src/main/java/ch/bbcag/lorlibrary/MainActivity.java
     Gson gson = new Gson();
 
     Card[] cards = gson.fromJson(string, Card[].class);
@@ -63,16 +64,18 @@ public class MainActivity extends AppCompatActivity {
           Card selected = (Card) parent.getItemAtPosition(position);
 
           // pass Extras to DetailPage
-          intent.putExtra("cardCode", selected.getCardCode());
-          intent.putExtra("name", selected.getName());
-          intent.putExtra("cardImage", selected.getCardImage());
-          intent.putExtra("banner", selected.getBanner());
-          intent.putExtra("descriptionRaw", selected.getDescriptionRaw());
-          intent.putExtra("levelupDescriptionRaw", selected.getLevelupDescriptionRaw());
-          intent.putExtra("flavorText", selected.getFlavorText());
-          intent.putExtra("artistName", selected.getArtistName());
-          intent.putExtra("rarityRef", selected.getRarityRef());
-          intent.putExtra("type", selected.getType());
+                      intent.putExtra("cardCode", selected.getCardCode());
+                    intent.putExtra("name", selected.getName());
+                    intent.putExtra("cardImage", selected.getCardImage());
+                    intent.putExtra("banner", selected.getBanner());
+                    intent.putExtra("descriptionRaw", selected.getDescriptionRaw());
+                    intent.putExtra("levelupDescriptionRaw", selected.getLevelupDescriptionRaw());
+                    intent.putExtra("flavorText", selected.getFlavorText());
+                    intent.putExtra("artistName", selected.getArtistName());
+                    intent.putExtra("rarityRef", selected.getRarityRef());
+                    intent.putExtra("type", selected.getType());
+                    intent.putExtra("firstRegion", selected.getFirstRegion());
+
 
           Bundle args = new Bundle();
           startActivity(intent);
