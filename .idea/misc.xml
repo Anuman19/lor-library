@@ -4,10 +4,12 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/banpan/Desktop/DEV/LoR/lor-library/app/src/main/res/layout/activity_card_image_test.xml" value="0.353125" />
-        <entry key="..\:/Users/banpan/Desktop/DEV/LoR/lor-library/app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="..\:/Users/banpan/Desktop/DEV/LoR/lor-library/app/src/main/res/layout/card_layout.xml" value="0.190625" />
-        <entry key="..\:/Users/banpan/Desktop/DEV/LoR/lor-library/app/src/main/res/layout/recyclerview_adapter_layout.xml" value="0.2586050724637681" />
+        <entry key="..\:/Users/banpan/Desktop/DEV/LoR/lor-library/app/src/main/res/layout/activity_main.xml" value="0.2595108695652174" />
         <entry key="..\:/Users/bdrein/AndroidStudioProjects/LoRLibrary/app/src/main/res/layout/activity_main.xml" value="0.31068840579710144" />
+        <entry key="..\:/Users/bdrein/AndroidStudioProjects/LoR_Library/app/src/main/res/layout/activity_card_image_test.xml" value="0.22" />
+        <entry key="..\:/Users/bdrein/AndroidStudioProjects/LoR_Library/app/src/main/res/layout/activity_main.xml" value="0.23596014492753623" />
+        <entry key="..\:/Users/bdrein/AndroidStudioProjects/LoR_Library/app/src/main/res/layout/card_layout.xml" value="0.266304347826087" />
+        <entry key="..\:/Users/bdrein/AndroidStudioProjects/LoR_Library/app/src/main/res/layout/double_card_layout.xml" value="0.1" />
       </map>
     </option>
   </component>

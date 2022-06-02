@@ -48,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
         position -> {
           Intent intent = new Intent(this, CardImageTest.class);
           Card selected = cards[position];
-          System.out.println(selected);
 
           intent.putExtra("cardCode", selected.getCardCode());
           intent.putExtra("name", selected.getName());
@@ -71,27 +70,5 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView.LayoutManager linearLayoutManager = new LinearLayoutManager(this);
     recyclerView.setLayoutManager(linearLayoutManager);
     recyclerView.setAdapter(recyclerViewAdapter);
-
-    //    AdapterView.OnItemClickListener mListClickedHandler =
-    //        (parent, v, position, id) -> {
-    //          Intent intent = new Intent(this, CardImageTest.class);
-    //          Card selected = (Card) parent.getItemAtPosition(position);
-    //
-    //          // pass Extras to DetailPage
-    //          intent.putExtra("cardCode", selected.getCardCode());
-    //          intent.putExtra("name", selected.getName());
-    //          intent.putExtra("cardImage", selected.getCardImage());
-    //          intent.putExtra("banner", selected.getBanner());
-    //          intent.putExtra("descriptionRaw", selected.getDescriptionRaw());
-    //          intent.putExtra("levelupDescriptionRaw", selected.getLevelupDescriptionRaw());
-    //          intent.putExtra("flavorText", selected.getFlavorText());
-    //          intent.putExtra("artistName", selected.getArtistName());
-    //          intent.putExtra("rarityRef", selected.getRarityRef());
-    //          intent.putExtra("type", selected.getType());
-    //          intent.putExtra("firstRegion", selected.getFirstRegion());
-    //
-    //          Bundle args = new Bundle();
-    //          startActivity(intent);
-    //        };
   }
 }
