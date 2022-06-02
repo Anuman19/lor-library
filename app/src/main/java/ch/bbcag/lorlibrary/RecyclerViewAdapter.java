@@ -48,8 +48,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         .execute(card.getCardImage());
     holder.cardView.setOnClickListener(
         data -> {
-          Toast.makeText(context, "This is position of your Every ItemViews", Toast.LENGTH_SHORT)
-              .show();
           clickListener.onItemClick(position);
         });
   }
