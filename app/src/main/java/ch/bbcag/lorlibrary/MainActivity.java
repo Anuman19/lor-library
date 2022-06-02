@@ -40,10 +40,7 @@ public class MainActivity extends AppCompatActivity {
     } catch (IOException e) {
       e.printStackTrace();
     }
-//<<<<<<< HEAD
-//=======
-//
-//>>>>>>> 822ccdfc13094cb9b339001d0d799990cade3348
+
     Gson gson = new Gson();
 
     Card[] cards = gson.fromJson(string, Card[].class);
