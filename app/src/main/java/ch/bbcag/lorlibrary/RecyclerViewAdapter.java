@@ -6,27 +6,27 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.Arrays;
+import com.squareup.picasso.Picasso;
+
+import java.util.List;
 
 import ch.bbcag.lorlibrary.model.Card;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder> {
 
-  private Card[] cards;
-  private Context context;
-  private ClickListener clickListener;
+  private final List<Card> cards;
+  private final Context context;
+  private final ClickListener clickListener;
 
-  public RecyclerViewAdapter(Context context, Card[] cards, ClickListener clickListener) {
+  public RecyclerViewAdapter(Context context, List<Card> cards, ClickListener clickListener) {
     this.context = context;
     this.cards = cards;
     this.clickListener = clickListener;
-    System.out.println(Arrays.toString(cards));
   }
 
   @NonNull
@@ -41,26 +41,28 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
   @Override
   public void onBindViewHolder(
       @NonNull RecyclerViewAdapter.MyViewHolder holder, final int position) {
-    final Card card = cards[position];
+    final Card card = cards.get(position);
     holder.title.setText(card.getName());
 
-    new DownloadImageFromInternet(holder.image.getContext(), holder.image)
-        .execute(card.getCardImage());
-    holder.cardView.setOnClickListener(
-        data -> {
-          clickListener.onItemClick(position);
-        });
+    Picasso.with(context)
+        .load(card.getCardImage())
+        .noFade()
+        .placeholder(R.mipmap.ic_launcher_round)
+        .error(R.mipmap.ic_launcher)
+        .into(holder.image);
+
+    holder.cardView.setOnClickListener(data -> clickListener.onItemClick(position));
   }
 
   @Override
   public int getItemCount() {
-    return cards.length;
+    return cards.size();
   }
 
-  public class MyViewHolder extends RecyclerView.ViewHolder {
-    private TextView title;
-    private ImageView image;
-    private CardView cardView;
+  public static class MyViewHolder extends RecyclerView.ViewHolder {
+    private final TextView title;
+    private final ImageView image;
+    private final CardView cardView;
 
     public MyViewHolder(@NonNull View itemView) {
       super(itemView);
@@ -75,10 +77,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     public ImageView getImage() {
       return image;
-    }
-
-    public CardView getCardView() {
-      return cardView;
     }
   }
 }

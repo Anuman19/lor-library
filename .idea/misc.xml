@@ -3,8 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/banpan/Desktop/DEV/LoR/lor-library/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.201" />
+        <entry key="..\:/Users/banpan/Desktop/DEV/LoR/lor-library/app/src/main/res/drawable/ic_launcher_background.xml" value="0.201" />
         <entry key="..\:/Users/banpan/Desktop/DEV/LoR/lor-library/app/src/main/res/layout/activity_card_image_test.xml" value="0.353125" />
         <entry key="..\:/Users/banpan/Desktop/DEV/LoR/lor-library/app/src/main/res/layout/activity_main.xml" value="0.2595108695652174" />
+        <entry key="..\:/Users/banpan/Desktop/DEV/LoR/lor-library/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.201" />
+        <entry key="..\:/Users/banpan/Desktop/DEV/LoR/lor-library/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.201" />
         <entry key="..\:/Users/bdrein/AndroidStudioProjects/LoRLibrary/app/src/main/res/layout/activity_main.xml" value="0.31068840579710144" />
         <entry key="..\:/Users/bdrein/AndroidStudioProjects/LoR_Library/app/src/main/res/layout/activity_card_image_test.xml" value="0.22" />
         <entry key="..\:/Users/bdrein/AndroidStudioProjects/LoR_Library/app/src/main/res/layout/activity_main.xml" value="0.23596014492753623" />

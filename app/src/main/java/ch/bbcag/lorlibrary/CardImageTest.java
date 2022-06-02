@@ -12,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
+
 import java.io.InputStream;
 
 public class CardImageTest extends AppCompatActivity {
@@ -27,6 +29,7 @@ public class CardImageTest extends AppCompatActivity {
   private String rarityRef;
   private String type;
   private String firstRegion;
+  private Bitmap imageBitmap;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -47,17 +50,19 @@ public class CardImageTest extends AppCompatActivity {
 
     String info = firstRegion + ", " + type;
 
-    new DownloadImageFromInternet(
-            getApplicationContext(), (ImageView) findViewById(R.id.card_banner))
-        .execute(fullAbsolutePath);
+    Picasso.with(getApplicationContext())
+        .load(fullAbsolutePath)
+        .noFade()
+        .placeholder(R.mipmap.ic_launcher_round)
+        .error(R.mipmap.ic_launcher)
+        .into((ImageView) findViewById(R.id.card_banner));
 
-    new DownloadImageFromInternet(
-            getApplicationContext(), (ImageView) findViewById(R.id.card_image))
-        .execute(gameAbsolutePath);
-
-    new DownloadImageFromInternet(
-            getApplicationContext(), (ImageView) findViewById(R.id.card_image))
-        .execute(gameAbsolutePath);
+    Picasso.with(getApplicationContext())
+        .load(gameAbsolutePath)
+        .noFade()
+        .placeholder(R.mipmap.ic_launcher_round)
+        .error(R.mipmap.ic_launcher)
+        .into((ImageView) findViewById(R.id.card_image));
 
     TextView cardName = (TextView) findViewById(R.id.card_name);
     cardName.setText(name);
@@ -82,34 +87,4 @@ public class CardImageTest extends AppCompatActivity {
       levelUp.setText(levelupDescriptionRaw);
     }
   }
-
-  //    private class DownloadImageFromInternet extends AsyncTask<String, Void, Bitmap> {
-  //        ImageView imageView;
-  //
-  //        public DownloadImageFromInternet(ImageView imageView) {
-  //            this.imageView = imageView;
-  //            Toast.makeText(
-  //                            getApplicationContext(),
-  //                            "Please wait, it may take a few minutes...",
-  //                            Toast.LENGTH_SHORT)
-  //                    .show();
-  //        }
-  //
-  //        protected Bitmap doInBackground(String... urls) {
-  //            String imageURL = urls[0];
-  //            Bitmap bimage = null;
-  //            try {
-  //                InputStream in = new java.net.URL(imageURL).openStream();
-  //                bimage = BitmapFactory.decodeStream(in);
-  //            } catch (Exception e) {
-  //                Log.e("Error Message", e.getMessage());
-  //                e.printStackTrace();
-  //            }
-  //            return bimage;
-  //        }
-  //
-  //        protected void onPostExecute(Bitmap result) {
-  //            imageView.setImageBitmap(result);
-  //        }
-  //    }
 }
