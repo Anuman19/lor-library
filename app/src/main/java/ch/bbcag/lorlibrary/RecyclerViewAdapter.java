@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import ch.bbcag.lorlibrary.model.Card;
@@ -23,14 +22,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
   private final List<Card> cards;
   private final Context context;
   private final ClickListener clickListener;
-  private final List<String> ids = new ArrayList<>();
 
   public RecyclerViewAdapter(Context context, List<Card> cards, ClickListener clickListener) {
     this.context = context;
     this.cards = cards;
     this.clickListener = clickListener;
-
-    cards.forEach(card -> ids.add(card.getCardCode()));
   }
 
   @NonNull
@@ -45,10 +41,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
   @Override
   public void onBindViewHolder(
       @NonNull RecyclerViewAdapter.MyViewHolder holder, final int position) {
+
+    // get data for list
     final Card card = cards.get(position);
 
     holder.title.setText(card.getName());
 
+    // load image
     Picasso.with(context)
         .load(card.getCardImage())
         .noFade()
@@ -56,6 +55,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         .error(R.mipmap.ic_launcher)
         .into(holder.image);
 
+    // set on click for detail view
     holder.cardView.setOnClickListener(data -> clickListener.onItemClick(position));
   }
 
@@ -78,10 +78,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     public TextView getTitle() {
       return title;
-    }
-
-    public ImageView getImage() {
-      return image;
     }
   }
 }

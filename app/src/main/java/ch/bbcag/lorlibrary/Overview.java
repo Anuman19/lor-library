@@ -21,13 +21,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import ch.bbcag.lorlibrary.model.Card;
 
 public class Overview extends AppCompatActivity {
 
   private RecyclerView recyclerView;
-  private ProgressBar progressBar;
   private List<Card> cardList;
   private int start = 0;
   private int count;
@@ -44,7 +44,6 @@ public class Overview extends AppCompatActivity {
     NavigationView navigationView = findViewById(R.id.overview_navigation_view);
     navigationView.setNavigationItemSelectedListener(
         item -> {
-          System.out.println(item);
           if (item.getItemId() == R.id.main_page) {
             Intent intent = new Intent(Overview.this, MainActivity.class);
             startActivity(intent);
@@ -54,6 +53,8 @@ public class Overview extends AppCompatActivity {
           }
           return true;
         });
+
+    // generate List
     addCardsToClickableList();
   }
 
@@ -85,22 +86,22 @@ public class Overview extends AppCompatActivity {
         new ActionBarDrawerToggle(this, drawerLayout, R.string.nav_open, R.string.nav_close);
     drawerLayout.addDrawerListener(actionBarDrawerToggle);
     actionBarDrawerToggle.syncState();
-    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+    Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
     // Data
     Gson gson = new Gson();
-
     cardList = new ArrayList<>();
     cards = gson.fromJson(string, Card[].class);
 
     NestedScrollView nestedSV = findViewById(R.id.nested_scroll_view);
     recyclerView = findViewById(R.id.recycle_view);
-    progressBar = findViewById(R.id.progress_bar);
+    ProgressBar progressBar = findViewById(R.id.progress_bar);
     RecyclerView.LayoutManager linearLayoutManager = new LinearLayoutManager(this);
     recyclerView.setLayoutManager(linearLayoutManager);
 
     loadFiveCards();
+
+    // on scroll load five more cards
     nestedSV.setOnScrollChangeListener(
         (NestedScrollView.OnScrollChangeListener)
             (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
@@ -112,13 +113,11 @@ public class Overview extends AppCompatActivity {
 
                 // on below line we are making our progress bar visible.
                 progressBar.setVisibility(View.VISIBLE);
-                System.out.println("new page");
                 if (count < ((cards.length + 1) / 5)) {
                   // on below line we are again calling
                   // a method to load data in our array list.
                   loadFiveCards();
                 } else {
-
                   // make progressbar invisible at end of page
                   progressBar.setVisibility(View.INVISIBLE);
                 }
@@ -128,6 +127,7 @@ public class Overview extends AppCompatActivity {
 
   private void loadFiveCards() {
 
+    // onClickListener for adapter --> redundant
     ClickListener onClickListener =
         position -> {
           Intent intent = new Intent(this, CardDetail.class);
@@ -150,9 +150,10 @@ public class Overview extends AppCompatActivity {
 
     recyclerView.setVisibility(View.VISIBLE);
 
+    // start --> where to start in array, get the next five cards from there
     for (int i = start; i < start + 5; i++) {
 
-      // Edge cas: total 419 cards
+      // Edge case: total 419 cards
       if (i == 419) {
         break;
       }
@@ -160,19 +161,17 @@ public class Overview extends AppCompatActivity {
 
       RecyclerViewAdapter recyclerViewAdapter =
           new RecyclerViewAdapter(Overview.this, cardList, onClickListener);
-
       recyclerView.setAdapter(recyclerViewAdapter);
     }
     start += 5;
   }
 
+  // Burger Toggle
   @Override
   public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-
     if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
       return true;
     }
-
     return super.onOptionsItemSelected(item);
   }
 }

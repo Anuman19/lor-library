@@ -2,7 +2,6 @@ package ch.bbcag.lorlibrary.model;
 
 import androidx.annotation.NonNull;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Card {
@@ -19,14 +18,14 @@ public class Card {
   private String spellSpeed;
 
   // Lists
-  private List<String> keywordRefs;
-  private List<String> regionRefs;
+  private final List<String> keywordRefs;
+  private final List<String> regionRefs;
   private List<Object> assets;
 
   // Integer
-  private int cost;
-  private int attack;
-  private int health;
+  private final int cost;
+  private final int attack;
+  private final int health;
 
   public Card(
       String cardCode,
@@ -109,10 +108,6 @@ public class Card {
     this.artistName = artistName;
   }
 
-  public String getSpellSpeed() {
-    return spellSpeed;
-  }
-
   public void setSpellSpeed(String spellSpeed) {
     this.spellSpeed = spellSpeed;
   }
@@ -133,48 +128,8 @@ public class Card {
     this.type = type;
   }
 
-  public List<String> getKeywordRefs() {
-    return keywordRefs;
-  }
-
-  public void setKeywordRefs(List<String> keywordRefs) {
-    this.keywordRefs = keywordRefs;
-  }
-
-  public List<String> getRegionRefs() {
-    return regionRefs;
-  }
-
   public String getFirstRegion() {
     return regionRefs.get(0);
-  }
-
-  public void setRegionRefs(ArrayList<String> regionRefs) {
-    this.regionRefs = regionRefs;
-  }
-
-  public int getCost() {
-    return cost;
-  }
-
-  public void setCost(int cost) {
-    this.cost = cost;
-  }
-
-  public int getAttack() {
-    return attack;
-  }
-
-  public void setAttack(int attack) {
-    this.attack = attack;
-  }
-
-  public int getHealth() {
-    return health;
-  }
-
-  public void setHealth(int health) {
-    this.health = health;
   }
 
   protected List<Object> getAssets() {
@@ -206,13 +161,6 @@ public class Card {
     String[] paths = parent.split("=");
     System.out.println(parent);
     return paths[1].split(",");
-  }
-
-  public Card getCardByCode(String cardCode) {
-    if (this.cardCode.equals(cardCode)) {
-      return this;
-    }
-    return null;
   }
 
   @NonNull

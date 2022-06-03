@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
 import ch.bbcag.lorlibrary.model.Card;
@@ -25,11 +26,9 @@ import ch.bbcag.lorlibrary.model.Card;
 public class MainActivity extends AppCompatActivity {
 
   private Card[] cards;
-  private List<Card> randomCardList;
-  private Random random = new Random();
-  private DrawerLayout drawerLayout;
+  private final Random random = new Random();
   private ActionBarDrawerToggle actionBarDrawerToggle;
-  private List<Integer> randomNumbers = new ArrayList<>();
+  private final List<Integer> randomNumbers = new ArrayList<>();
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -50,20 +49,24 @@ public class MainActivity extends AppCompatActivity {
           }
           return true;
         });
-    drawerLayout = findViewById(R.id.my_drawer_layout);
+
+    // Burger Menu
+    DrawerLayout drawerLayout = findViewById(R.id.my_drawer_layout);
     actionBarDrawerToggle =
         new ActionBarDrawerToggle(this, drawerLayout, R.string.nav_open, R.string.nav_close);
     drawerLayout.addDrawerListener(actionBarDrawerToggle);
     actionBarDrawerToggle.syncState();
-    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
     // random Data
-
     getCardsFromFile();
+
     RecyclerView recyclerView = findViewById(R.id.main_recycle_view);
     RecyclerView.LayoutManager linearLayoutManager = new LinearLayoutManager(this);
     recyclerView.setLayoutManager(linearLayoutManager);
-    randomCardList = new ArrayList<>();
+    List<Card> randomCardList = new ArrayList<>();
+
+    // display five random cards
     for (int i = 0; i < 5; i++) {
       int randomNumber = random.nextInt(cards.length + 1);
 
@@ -75,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
     ClickListener onClickListener =
         position -> {
           Intent intent = new Intent(this, CardDetail.class);
+          // passing the right ids for detail view
           Card selected = cards[randomNumbers.get(position)];
 
           intent.putExtra("cardCode", selected.getCardCode());
@@ -89,7 +93,6 @@ public class MainActivity extends AppCompatActivity {
           intent.putExtra("type", selected.getType());
           intent.putExtra("firstRegion", selected.getFirstRegion());
 
-          Bundle args = new Bundle();
           startActivity(intent);
         };
 
@@ -124,6 +127,7 @@ public class MainActivity extends AppCompatActivity {
     cards = gson.fromJson(string, Card[].class);
   }
 
+  // Burger Toggle
   @Override
   public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
