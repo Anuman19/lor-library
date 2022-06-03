@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ch.bbcag.lorlibrary.model.Card;
@@ -22,11 +23,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
   private final List<Card> cards;
   private final Context context;
   private final ClickListener clickListener;
+  private final List<String> ids = new ArrayList<>();
 
   public RecyclerViewAdapter(Context context, List<Card> cards, ClickListener clickListener) {
     this.context = context;
     this.cards = cards;
     this.clickListener = clickListener;
+
+    cards.forEach(card -> ids.add(card.getCardCode()));
   }
 
   @NonNull
@@ -42,6 +46,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
   public void onBindViewHolder(
       @NonNull RecyclerViewAdapter.MyViewHolder holder, final int position) {
     final Card card = cards.get(position);
+
     holder.title.setText(card.getName());
 
     Picasso.with(context)

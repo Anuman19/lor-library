@@ -4,19 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
-import java.io.InputStream;
-
-public class CardImageTest extends AppCompatActivity {
+public class CardDetail extends AppCompatActivity {
 
   private String cardCode;
   private String gameAbsolutePath;
@@ -34,7 +28,7 @@ public class CardImageTest extends AppCompatActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_card_image_test);
+    setContentView(R.layout.activity_card_detail);
     Intent intent = getIntent();
     cardCode = intent.getStringExtra("cardCode");
     gameAbsolutePath = intent.getStringExtra("cardImage");
