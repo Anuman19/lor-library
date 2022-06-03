@@ -1,6 +1,8 @@
 package ch.bbcag.lorlibrary.model;
 
-import java.util.ArrayList;
+import androidx.annotation.NonNull;
+
+import java.util.List;
 
 public class Card {
 
@@ -16,16 +18,31 @@ public class Card {
     private String spellSpeed;
 
     // Lists
-    private ArrayList<String> keywordRefs;
-    private ArrayList<String> regionRefs;
-    private ArrayList<Object> assets;
+    private final List<String> keywordRefs;
+    private final List<String> regionRefs;
+    private List<Object> assets;
 
     // Integer
-    private int cost;
-    private int attack;
-    private int health;
+    private final int cost;
+    private final int attack;
+    private final int health;
 
-    public Card(String cardCode, String name, String descriptionRaw, String levelupDescriptionRaw, String flavorText, String artistName, String spellSpeed, String rarityRef, String type, ArrayList<String> keywordRefs, ArrayList<String> regionRefs, int cost, int attack, int health) {
+    public Card(
+            String cardCode,
+            String name,
+            String descriptionRaw,
+            String levelupDescriptionRaw,
+            String flavorText,
+            String artistName,
+            String spellSpeed,
+            String rarityRef,
+            String type,
+            List<String> keywordRefs,
+            List<String> regionRefs,
+            List<Object> assets,
+            int cost,
+            int attack,
+            int health) {
         this.cardCode = cardCode;
         this.name = name;
         this.descriptionRaw = descriptionRaw;
@@ -37,6 +54,7 @@ public class Card {
         this.type = type;
         this.keywordRefs = keywordRefs;
         this.regionRefs = regionRefs;
+        this.assets = assets;
         this.cost = cost;
         this.attack = attack;
         this.health = health;
@@ -90,10 +108,6 @@ public class Card {
         this.artistName = artistName;
     }
 
-    public String getSpellSpeed() {
-        return spellSpeed;
-    }
-
     public void setSpellSpeed(String spellSpeed) {
         this.spellSpeed = spellSpeed;
     }
@@ -114,63 +128,44 @@ public class Card {
         this.type = type;
     }
 
-    public ArrayList<String> getKeywordRefs() {
-        return keywordRefs;
+    public String getFirstRegion() {
+        return regionRefs.get(0);
     }
 
-    public void setKeywordRefs(ArrayList<String> keywordRefs) {
-        this.keywordRefs = keywordRefs;
+    protected List<Object> getAssets() {
+        return assets;
     }
 
-    public ArrayList<String> getRegionRefs() {
-        return regionRefs;
+    public void setAssets(List<Object> assets) {
+        this.assets = assets;
     }
 
-    public void setRegionRefs(ArrayList<String> regionRefs) {
-        this.regionRefs = regionRefs;
+    public String getBanner() {
+        String parent = String.valueOf(getAssets().get(0));
+        String[] paths = parent.split(",");
+        String[] banner = paths[1].split("=");
+        String bannerPath = banner[1];
+        bannerPath = bannerPath.substring(0, bannerPath.length() - 1);
+        return bannerPath;
     }
 
-    public int getCost() {
-        return cost;
+    public String getCardImage() {
+        String parent = String.valueOf(getAssets().get(0));
+        String[] paths = parent.split(",");
+        String[] cardImage = paths[0].split("=");
+        return cardImage[1];
     }
 
-    public void setCost(int cost) {
-        this.cost = cost;
+    public String[] getAssetsString() {
+        String parent = String.valueOf(getAssets().get(0));
+        String[] paths = parent.split("=");
+        System.out.println(parent);
+        return paths[1].split(",");
     }
 
-    public int getAttack() {
-        return attack;
-    }
-
-    public void setAttack(int attack) {
-        this.attack = attack;
-    }
-
-    public int getHealth() {
-        return health;
-    }
-
-    public void setHealth(int health) {
-        this.health = health;
-    }
-
+    @NonNull
     @Override
     public String toString() {
-        return "Card{" +
-                "cardCode='" + cardCode + '\'' +
-                ", name='" + name + '\'' +
-                ", descriptionRaw='" + descriptionRaw + '\'' +
-                ", levelupDescriptionRaw='" + levelupDescriptionRaw + '\'' +
-                ", flavorText='" + flavorText + '\'' +
-                ", artistName='" + artistName + '\'' +
-                ", spellSpeed='" + spellSpeed + '\'' +
-                ", rarityRef='" + rarityRef + '\'' +
-                ", type='" + type + '\'' +
-                ", keywordRefs=" + keywordRefs +
-                ", regionRefs=" + regionRefs +
-                ", cost=" + cost +
-                ", attack=" + attack +
-                ", health=" + health +
-                '}';
+        return name + "\n" + type;
     }
 }

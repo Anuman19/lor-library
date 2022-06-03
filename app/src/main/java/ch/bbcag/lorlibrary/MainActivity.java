@@ -1,53 +1,139 @@
 package ch.bbcag.lorlibrary;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.ListView;
+import android.view.MenuItem;
 
+import com.google.android.material.navigation.NavigationView;
 import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.Random;
 
 import ch.bbcag.lorlibrary.model.Card;
 
 public class MainActivity extends AppCompatActivity {
 
+    private Card[] cards;
+    private final Random random = new Random();
+    private ActionBarDrawerToggle actionBarDrawerToggle;
+    private final List<Integer> randomNumbers = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setTitle("LoR Library");
-        try {
-            addCardsToClickableList();
-        } catch (IOException e) {
-            e.printStackTrace();
+
+        // Navigation
+
+        NavigationView navigationView = findViewById(R.id.main_navigation_view);
+        navigationView.setNavigationItemSelectedListener(
+                item -> {
+                    if (item.getItemId() == R.id.main_page) {
+                        Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                        startActivity(intent);
+                    } else {
+                        Intent intent = new Intent(MainActivity.this, Overview.class);
+                        startActivity(intent);
+                    }
+                    return true;
+                });
+
+        // Burger Menu
+        DrawerLayout drawerLayout = findViewById(R.id.my_drawer_layout);
+        actionBarDrawerToggle =
+                new ActionBarDrawerToggle(this, drawerLayout, R.string.nav_open, R.string.nav_close);
+        drawerLayout.addDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.syncState();
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+
+        // random Data
+        getCardsFromFile();
+
+        RecyclerView recyclerView = findViewById(R.id.main_recycle_view);
+        RecyclerView.LayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        List<Card> randomCardList = new ArrayList<>();
+
+        // display five random cards
+        for (int i = 0; i < 5; i++) {
+            int randomNumber = random.nextInt(cards.length + 1);
+
+            // get the right id for detail view
+            randomNumbers.add(randomNumber);
+            randomCardList.add(cards[randomNumber]);
         }
+
+        ClickListener onClickListener =
+                position -> {
+                    Intent intent = new Intent(this, CardDetail.class);
+                    // passing the right ids for detail view
+                    Card selected = cards[randomNumbers.get(position)];
+
+                    intent.putExtra("cardCode", selected.getCardCode());
+                    intent.putExtra("name", selected.getName());
+                    intent.putExtra("cardImage", selected.getCardImage());
+                    intent.putExtra("banner", selected.getBanner());
+                    intent.putExtra("descriptionRaw", selected.getDescriptionRaw());
+                    intent.putExtra("levelupDescriptionRaw", selected.getLevelupDescriptionRaw());
+                    intent.putExtra("flavorText", selected.getFlavorText());
+                    intent.putExtra("artistName", selected.getArtistName());
+                    intent.putExtra("rarityRef", selected.getRarityRef());
+                    intent.putExtra("type", selected.getType());
+                    intent.putExtra("firstRegion", selected.getFirstRegion());
+
+                    startActivity(intent);
+                };
+
+        RecyclerViewAdapter recyclerViewAdapter =
+                new RecyclerViewAdapter(MainActivity.this, randomCardList, onClickListener);
+
+        recyclerView.setAdapter(recyclerViewAdapter);
     }
 
-    //This method loads all the cards from the json file into Card Objects to then display
-    private void addCardsToClickableList() throws IOException {
-        ListView cards = findViewById(R.id.cardList);
+    private void getCardsFromFile() {
 
         String string = "";
+        InputStream inputStream = null;
         try {
-            InputStream inputStream = getAssets().open("set1-en_us.json");
+            inputStream = getAssets().open("set1-en_us.json");
             int size = inputStream.available();
             byte[] buffer = new byte[size];
             inputStream.read(buffer);
             string = new String(buffer);
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            assert inputStream != null;
+            try {
+                inputStream.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         Gson gson = new Gson();
+        cards = gson.fromJson(string, Card[].class);
+    }
 
-        ArrayAdapter<Card> cardAdapter =
-                new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1);
-        cardAdapter.addAll(gson.fromJson(string, Card[].class));
-        cards.setAdapter(cardAdapter);
+    // Burger Toggle
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
