@@ -1,0 +1,29 @@
+
+t
+java:S1450"YRemove the "artistName" field and declare it as a local variable in the relevant methods.(äš„¯ûÿÿÿÿ
+r
+java:S1450"WRemove the "cardCode" field and declare it as a local variable in the relevant methods.(ï×ÿÇşÿÿÿÿ
+s
+java:S1450"]Remove the "descriptionRaw" field and declare it as a local variable in the relevant methods.(•Úó†
+u
+java:S1450"ZRemove the "firstRegion" field and declare it as a local variable in the relevant methods.(¿ôÇªüÿÿÿÿ
+t
+java:S1450"YRemove the "flavorText" field and declare it as a local variable in the relevant methods.(æÜÔúÿÿÿÿ
+z
+java:S1450"_Remove the "fullAbsolutePath" field and declare it as a local variable in the relevant methods.(¬õ†îúÿÿÿÿ
+z
+java:S1450"_Remove the "gameAbsolutePath" field and declare it as a local variable in the relevant methods.(İ«¹îşÿÿÿÿ
+z
+java:S1450"dRemove the "levelupDescriptionRaw" field and declare it as a local variable in the relevant methods.(¾šëÌ
+i
+java:S1450"SRemove the "name" field and declare it as a local variable in the relevant methods.(Ë¥¼
+n
+java:S1450"XRemove the "rarityRef" field and declare it as a local variable in the relevant methods.(» ç”
+n
+java:S1450"SRemove the "type" field and declare it as a local variable in the relevant methods.(–î†ûÿÿÿÿ
+G
+java:S1068",Remove this unused "cardCode" private field.(ï×ÿÇşÿÿÿÿ
+I
+java:S1068".Remove this unused "artistName" private field.(äš„¯ûÿÿÿÿ
+E
+java:S1068 "/Remove this unused "imageBitmap" private field.(ãªÇù

@@ -77,13 +77,16 @@ public class MainActivity extends AppCompatActivity {
                 // in this method we are incrementing page number,
                 // making progress bar visible and calling get data method.
                 count++;
+
                 // on below line we are making our progress bar visible.
                 progressBar.setVisibility(View.VISIBLE);
                 System.out.println("new page");
-                if (count < (cards.length / 5)) {
+                if (count < ((cards.length + 1) / 5)) {
                   // on below line we are again calling
                   // a method to load data in our array list.
                   loadFiveCards();
+                } else {
+                  progressBar.setVisibility(View.INVISIBLE);
                 }
               }
             });
@@ -115,6 +118,9 @@ public class MainActivity extends AppCompatActivity {
     recyclerView.setVisibility(View.VISIBLE);
 
     for (int i = start; i < start + 5; i++) {
+      if (i == 419) {
+        break;
+      }
       cardList.add(cards[i]);
 
       RecyclerViewAdapter recyclerViewAdapter =
