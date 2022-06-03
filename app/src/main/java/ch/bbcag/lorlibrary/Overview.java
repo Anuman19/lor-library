@@ -41,8 +41,7 @@ public class Overview extends AppCompatActivity {
     setContentView(R.layout.activity_overview);
 
     // Navigation
-
-    NavigationView navigationView = findViewById(R.id.navigation_view);
+    NavigationView navigationView = findViewById(R.id.overview_navigation_view);
     navigationView.setNavigationItemSelectedListener(
         item -> {
           System.out.println(item);
@@ -80,6 +79,7 @@ public class Overview extends AppCompatActivity {
       }
     }
 
+    // burger menu
     DrawerLayout drawerLayout = findViewById(R.id.my_drawer_layout_overview);
     actionBarDrawerToggle =
         new ActionBarDrawerToggle(this, drawerLayout, R.string.nav_open, R.string.nav_close);
@@ -87,6 +87,8 @@ public class Overview extends AppCompatActivity {
     actionBarDrawerToggle.syncState();
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+
+    // Data
     Gson gson = new Gson();
 
     cardList = new ArrayList<>();

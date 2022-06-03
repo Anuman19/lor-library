@@ -1,13 +1,18 @@
 package ch.bbcag.lorlibrary;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.material.navigation.NavigationView;
 import com.squareup.picasso.Picasso;
 
 public class CardDetail extends AppCompatActivity {
@@ -25,10 +30,37 @@ public class CardDetail extends AppCompatActivity {
   private String firstRegion;
   private Bitmap imageBitmap;
 
+  private ActionBarDrawerToggle actionBarDrawerToggle;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_card_detail);
+
+    // Navigation
+    NavigationView navigationView = findViewById(R.id.detail_navigation_view);
+    System.out.println(navigationView.getId());
+    navigationView.setNavigationItemSelectedListener(
+        item -> {
+          System.out.println(item);
+          if (item.getItemId() == R.id.main_page) {
+            Intent intent = new Intent(CardDetail.this, MainActivity.class);
+            startActivity(intent);
+          } else {
+            Intent intent = new Intent(CardDetail.this, Overview.class);
+            startActivity(intent);
+          }
+          return true;
+        });
+
+    // burger menu
+    DrawerLayout drawerLayout = findViewById(R.id.my_drawer_layout_detail);
+    actionBarDrawerToggle =
+        new ActionBarDrawerToggle(this, drawerLayout, R.string.nav_open, R.string.nav_close);
+    drawerLayout.addDrawerListener(actionBarDrawerToggle);
+    actionBarDrawerToggle.syncState();
+    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
     Intent intent = getIntent();
     cardCode = intent.getStringExtra("cardCode");
     gameAbsolutePath = intent.getStringExtra("cardImage");
@@ -80,5 +112,13 @@ public class CardDetail extends AppCompatActivity {
       TextView levelUp = (TextView) findViewById(R.id.level_up);
       levelUp.setText(levelupDescriptionRaw);
     }
+  }
+
+  @Override
+  public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+    if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
+      return true;
+    }
+    return super.onOptionsItemSelected(item);
   }
 }
