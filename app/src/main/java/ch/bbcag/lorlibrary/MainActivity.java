@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
 
         // display five random cards
         for (int i = 0; i < 5; i++) {
-            int randomNumber = random.nextInt(cards.length + 1);
+            int randomNumber = random.nextInt(cards.length);
 
             // get the right id for detail view
             randomNumbers.add(randomNumber);
