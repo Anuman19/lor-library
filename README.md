@@ -1,9 +1,5 @@
 # README
 
-## Project Members
-
-* [Nicolas's 33](https://github.com/whattheplay) (Scrum Master, Product Owner, Team Member)
-* [Mr. Naveen Anpalagan](https://github.com/breezybbc) (Product Owner, Team Member)
 
 ## Documentation
 
